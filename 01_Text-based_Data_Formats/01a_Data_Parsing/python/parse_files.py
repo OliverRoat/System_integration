@@ -2,6 +2,9 @@ import csv
 import json
 import yaml
 import xml.etree.ElementTree as ET
+import os
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 def parse_csv(file_path):
     with open(file_path, mode='r') as file:
