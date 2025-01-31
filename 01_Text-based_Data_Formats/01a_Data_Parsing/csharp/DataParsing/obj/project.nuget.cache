@@ -1,12 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "vzPlVKmWk4w=",
+  "dgSpecHash": "XYanFB/HPQ0=",
   "success": true,
   "projectFilePath": "C:\\Users\\OliverRoat\\KEA\\Sys_int\\System_integration\\01_Text-based_Data_Formats\\01a_Data_Parsing\\csharp\\DataParsing\\DataParsing.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\OliverRoat\\.nuget\\packages\\csvhelper\\33.0.1\\csvhelper.33.0.1.nupkg.sha512",
     "C:\\Users\\OliverRoat\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
-    "C:\\Users\\OliverRoat\\.nuget\\packages\\yamldotnet\\16.3.0\\yamldotnet.16.3.0.nupkg.sha512"
+    "C:\\Users\\OliverRoat\\.nuget\\packages\\yamldotnet\\16.3.0\\yamldotnet.16.3.0.nupkg.sha512",
+    "C:\\Users\\OliverRoat\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.12\\microsoft.netcore.app.ref.8.0.12.nupkg.sha512",
+    "C:\\Users\\OliverRoat\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.12\\microsoft.windowsdesktop.app.ref.8.0.12.nupkg.sha512",
+    "C:\\Users\\OliverRoat\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.12\\microsoft.aspnetcore.app.ref.8.0.12.nupkg.sha512",
+    "C:\\Users\\OliverRoat\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.12\\microsoft.netcore.app.host.win-x64.8.0.12.nupkg.sha512"
   ],
   "logs": []
 }
