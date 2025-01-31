@@ -1,0 +1,3 @@
+name = nameExampleFORCSHARP
+age = AgeExampleFORCSHARP
+Hobbies(Football,coding,gaming)

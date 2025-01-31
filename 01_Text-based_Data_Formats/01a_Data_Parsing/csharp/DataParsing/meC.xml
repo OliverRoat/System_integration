@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <name>NameExampleFORCSHARP</name>
+    <age>25</age>
+    <hobbies>
+        <hobby>Reading</hobby>
+        <hobby>Swimming</hobby>
+        <hobby>Travelling</hobby>
+    </hobbies>
+</root>
