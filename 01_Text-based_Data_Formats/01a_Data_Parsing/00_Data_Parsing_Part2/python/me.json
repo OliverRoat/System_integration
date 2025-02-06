@@ -1,0 +1,5 @@
+{
+    "name": "NameExample",
+    "age": 10,
+    "hobbies": ["football", "gaming", "coding"]
+}
