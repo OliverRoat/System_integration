@@ -17,3 +17,5 @@ build-backend = "poetry.core.masonry.api"
 packages = [
     { include = "01_Text-based_Data_Formats/01a_Data_Parsing/python" }
 ]
+[tool.poetry.scripts]
+run-server = "run_server:main"

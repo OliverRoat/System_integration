@@ -18,8 +18,8 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 @app.get("/csv")
 def get_csv():
     data = parse_csv('me.csv')
-    csv_content = "\n".join([",".join(row.values()) for row in data])
-    return PlainTextResponse(content=csv_content, media_type="text/csv")
+    csv_content = "\n".join([",".join(str(value) if value is not None else "" for value in row.values()) for row in data])
+    return PlainTextResponse(content=csv_content, media_type="text/plain")
 
 @app.get("/json")
 def get_json():
@@ -30,12 +30,12 @@ def get_json():
 def get_yaml():
     data = parse_yaml('me.yaml')
     yaml_content = yaml.dump(data)
-    return PlainTextResponse(content=yaml_content, media_type="application/x-yaml")
+    return PlainTextResponse(content=yaml_content, media_type="text/plain")
 
 @app.get("/xml")
 def get_xml():
     data = parse_xml('me.xml')
-    xml_content = ET.tostring(data, encoding='unicode')
+    xml_content = ET.tostring(ET.Element("root", data), encoding='unicode')
     return PlainTextResponse(content=xml_content, media_type="application/xml")
 
 @app.get("/txt")
