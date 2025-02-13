@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse, PlainTextResponse
 import yaml
 
 # Add the directory containing parse_files.py to the sys.path
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'python'))
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__))))
 
 from parse_files import parse_csv, parse_json, parse_yaml, parse_xml, parse_txt
 

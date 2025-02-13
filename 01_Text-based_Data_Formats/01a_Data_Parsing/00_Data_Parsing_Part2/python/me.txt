@@ -1,3 +1,0 @@
-name = nameExample
-age = AgeExample
-Hobbies(Football,coding,gaming)

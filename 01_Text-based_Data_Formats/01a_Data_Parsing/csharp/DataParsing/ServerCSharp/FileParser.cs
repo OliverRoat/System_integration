@@ -1,31 +1,14 @@
-using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Xml.Linq;
+using CsvHelper;
 using Newtonsoft.Json;
 using YamlDotNet.Serialization;
-using CsvHelper;
-using System.Globalization;
 
-class Program
+public static class FileParser
 {
-    static void Main()
-    {
-        var csvData = ParseCsv("meC.csv");
-        var jsonData = ParseJson("meC.json");
-        var yamlData = ParseYaml("meC.yaml");
-        var xmlData = ParseXml("meC.xml");
-        var txtData = ParseTxt("meC.txt");
-
-        Console.WriteLine("CSV Data:");
-        PrintCsvData(csvData);
-        Console.WriteLine("JSON Data: " + JsonConvert.SerializeObject(jsonData, Formatting.Indented));
-        Console.WriteLine("YAML Data: " + JsonConvert.SerializeObject(yamlData, Formatting.Indented));
-        Console.WriteLine("XML Data: " + JsonConvert.SerializeObject(xmlData, Formatting.Indented));
-        Console.WriteLine("TXT Data: " + txtData);
-    }
-
-    static List<Dictionary<string, string>> ParseCsv(string filePath)
+    public static List<Dictionary<string, string>> ParseCsv(string filePath)
     {
         using (var reader = new StreamReader(filePath))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
@@ -46,32 +29,28 @@ class Program
         }
     }
 
-    static void PrintCsvData(List<Dictionary<string, string>> csvData)
-    {
-        foreach (var row in csvData)
-        {
-            foreach (var kvp in row)
-            {
-                Console.Write($"{kvp.Key}: {kvp.Value}, ");
-            }
-            Console.WriteLine();
-        }
-    }
-
-    static dynamic ParseJson(string filePath)
+    public static Dictionary<string, object> ParseJson(string filePath)
     {
         var json = File.ReadAllText(filePath);
-        return JsonConvert.DeserializeObject(json);
+        var jsonObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+
+        // Convert hobbies to a list of strings
+        if (jsonObject.ContainsKey("hobbies") && jsonObject["hobbies"] is Newtonsoft.Json.Linq.JArray hobbiesArray)
+        {
+            jsonObject["hobbies"] = hobbiesArray.ToObject<List<string>>();
+        }
+
+        return jsonObject;
     }
 
-    static dynamic ParseYaml(string filePath)
+    public static dynamic ParseYaml(string filePath)
     {
         var yaml = File.ReadAllText(filePath);
         var deserializer = new Deserializer();
         return deserializer.Deserialize<dynamic>(yaml) ?? new object();
     }
 
-    static Dictionary<string, object> ParseXml(string filePath)
+    public static Dictionary<string, object> ParseXml(string filePath)
     {
         var xml = XDocument.Load(filePath);
         var root = xml.Root;
@@ -117,7 +96,7 @@ class Program
         return data;
     }
 
-    static string ParseTxt(string filePath)
+    public static string ParseTxt(string filePath)
     {
         return File.ReadAllText(filePath);
     }
