@@ -29,5 +29,5 @@ To run the C# server, use the following command:
 On Windows:
 
 ```bat
-run_csharp_server.bat
+.\run_csharp_server.bat
 ```
