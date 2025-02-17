@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse, PlainTextResponse
 import yaml
+import httpx
 
 # Add the directory containing parse_files.py to the sys.path
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__))))
@@ -14,6 +15,8 @@ app = FastAPI()
 
 # Change directory to the location of the data files
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+SERVER_A_URL = "http://localhost:5194"
 
 @app.get("/csv")
 def get_csv():
@@ -43,6 +46,15 @@ def get_txt():
     data = parse_txt('me.txt')
     return PlainTextResponse(content=data, media_type="text/plain")
 
+@app.get("/proxy/{file_type}")
+async def proxy_to_server_a(file_type: str):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"{SERVER_A_URL}/DataParsing/{file_type}")
+        if response.headers.get("content-type") == "application/json":
+            return JSONResponse(content=response.json())
+        else:
+            return PlainTextResponse(content=response.text, media_type=response.headers.get("content-type"))
+        
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)

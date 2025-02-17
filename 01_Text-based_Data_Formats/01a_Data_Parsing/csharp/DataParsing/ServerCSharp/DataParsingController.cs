@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using YamlDotNet.Serialization;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace DataParsingApi.Controllers
 {
@@ -11,6 +13,8 @@ namespace DataParsingApi.Controllers
     public class DataParsingController : ControllerBase
     {
         private readonly string baseDirectory = Directory.GetCurrentDirectory();
+        private readonly HttpClient httpClient = new HttpClient();
+        private readonly string serverBUrl = "http://localhost:8000";
 
         [HttpGet("csv")]
         public IActionResult GetCsv()
@@ -50,6 +54,14 @@ namespace DataParsingApi.Controllers
             var filePath = Path.Combine(baseDirectory, "meC.txt");
             var data = FileParser.ParseTxt(filePath);
             return Ok(data);
+        }
+
+        [HttpGet("proxy/{fileType}")]
+        public async Task<IActionResult> ProxyToServerB(string fileType)
+        {
+            var response = await httpClient.GetAsync($"{serverBUrl}/{fileType}");
+            var content = await response.Content.ReadAsStringAsync();
+            return Content(content, response.Content.Headers.ContentType.ToString());
         }
     }
 }
