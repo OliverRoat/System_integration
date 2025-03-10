@@ -20,9 +20,10 @@
 
         const eventSource = new EventSource("/synchronizetime");
 
-        eventSource.addEventListener("message", (event) => {
-            serverSentTimeDiv.textContent = event.data;
-        });
+        eventSource.onmessage = (event) => {
+            serverSentTimeDiv.textContent = event.data;   
+        };
+
 
         eventSource.addEventListener("open", (event) => {
             serverSentStatusDiv.textContent = "Connected";
