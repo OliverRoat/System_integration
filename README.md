@@ -5,13 +5,13 @@
 Hvis det er første gang du bruger projectet skal du køre
 
 ```sh
-poetry init
+poetry init -n
 ```
 
 Ellers kan du starte herfra
 
 ```sh
-poetry install
+poetry install --no-root
 ```
 
 ```sh
